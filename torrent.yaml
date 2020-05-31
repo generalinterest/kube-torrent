@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: torrent
+  labels:
+    app: torrent
+spec:
+  containers:
+  - image:  generalinterest/torrent
+    imagePullPolicy: IfNotPresent
+    name: torrent
+    volumeMounts:
+    - mountPath: /transmission/downloads
+      name: downloads
+    - mountPath: /transmission/incomplete
+      name: incomplete
+  nodeSelector:
+    kubernetes.io/arch: arm
+#    kubernetes.io/arch: amd64
+  restartPolicy: Never
+#  restartPolicy: Always
+  volumes:
+  - name: downloads
+    nfs:
+      path: /mnt/nfs/pvdata/torrent/downloads
+      server: nfs.home
+  - name: incomplete
+    nfs:
+      path: /mnt/nfs/pvdata/torrent/incomplete
+      server: nfs.home

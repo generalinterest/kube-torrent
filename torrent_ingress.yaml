@@ -1,0 +1,12 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: torrent
+spec:
+  rules:
+  - host: torrent.pik8s.home
+    http:
+      paths:
+      - backend:
+          serviceName: torrenttcp
+          servicePort: 9091
