@@ -1,12 +1,13 @@
-apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
 metadata:
   name: torrent
 spec:
-  rules:
-  - host: torrent.pik8s.home
-    http:
-      paths:
-      - backend:
-          serviceName: torrenttcp
-          servicePort: 9091
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`torrent.pik8s.home`) && PathPrefix(`/`)
+    kind: Rule
+    services:
+    - name: torrenttcp
+      port: 9091

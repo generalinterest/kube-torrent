@@ -5,7 +5,8 @@ metadata:
     app: torrenttcp
   name: torrenttcp
 spec:
-  type: LoadBalancer
+  type: NodePort
+#  type: LoadBalancer
   ports:
   - port: 9091
     protocol: TCP
@@ -23,7 +24,8 @@ metadata:
     app: torrentudp
   name: torrentudp
 spec:
-  type: LoadBalancer
+  type: NodePort
+#  type: LoadBalancer
   ports:
   - port: 51414
     protocol: UDP
