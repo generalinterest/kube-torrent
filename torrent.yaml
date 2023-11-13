@@ -29,8 +29,8 @@ spec:
     nfs:
       path: /mnt/nfs/pvdata/torrent/incomplete
       server: nfs.home
-
-
+---
+apiVersion: v1
 kind: Service
 metadata:
   labels:
@@ -48,7 +48,8 @@ spec:
     name: datatcp
   selector:
     app: torrent
-
+---
+apiVersion: v1
 kind: Service
 metadata:
   labels:
@@ -63,7 +64,7 @@ spec:
     name: dataudp
   selector:
     app: torrent
-
+---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
