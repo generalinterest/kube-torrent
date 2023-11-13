@@ -30,7 +30,7 @@ spec:
       path: /mnt/nfs/pvdata/torrent/incomplete
       server: nfs.home
 
-apiVersion: v1
+
 kind: Service
 metadata:
   labels:
@@ -48,8 +48,7 @@ spec:
     name: datatcp
   selector:
     app: torrent
----
-apiVersion: v1
+
 kind: Service
 metadata:
   labels:
