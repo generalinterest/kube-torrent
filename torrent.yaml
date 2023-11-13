@@ -15,7 +15,8 @@ spec:
     - mountPath: /transmission/incomplete
       name: incomplete
   nodeSelector:
-    kubernetes.io/arch: arm
+    kubernetes.io/arch: arm64
+#    kubernetes.io/arch: arm
 #    kubernetes.io/arch: amd64
   restartPolicy: Never
 #  restartPolicy: Always
