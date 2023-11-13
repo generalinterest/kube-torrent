@@ -29,3 +29,52 @@ spec:
     nfs:
       path: /mnt/nfs/pvdata/torrent/incomplete
       server: nfs.home
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: torrenttcp
+  name: torrenttcp
+spec:
+  type: NodePort
+#  type: LoadBalancer
+  ports:
+  - port: 9091
+    protocol: TCP
+    name: web
+  - port: 51413
+    protocol: TCP
+    name: datatcp
+  selector:
+    app: torrent
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: torrentudp
+  name: torrentudp
+spec:
+  type: NodePort
+#  type: LoadBalancer
+  ports:
+  - port: 51414
+    protocol: UDP
+    name: dataudp
+  selector:
+    app: torrent
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: torrent
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`torrent.pik8s.home`) && PathPrefix(`/`)
+    kind: Rule
+    services:
+    - name: torrenttcp
+      port: 9091
